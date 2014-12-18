@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class TesteSelenium {
+public abstract class TesteSelenium {
 
 	private WebDriver driver = new FirefoxDriver();
 	
@@ -16,8 +16,20 @@ public class TesteSelenium {
 	public void abrirTela(){
 		driver.get("http://localhost:8080/TigerShoes/index");
 	}
+	public void abrirLink(String link){
+		driver.get(link);
+	}
 	
 	public void clicar(String id) {
 		driver.findElement(By.id(id)).click();
 	}
+	public void clicarMenu(String menu){
+		driver.findElement(By.className(menu)).click();
+	}
+	public void digitar(String texto, String id){
+		driver.findElement(By.id(id)).sendKeys(texto);
+	}
+	
+	
+	
 }

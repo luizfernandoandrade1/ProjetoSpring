@@ -35,7 +35,7 @@
 				<div class="panel-body">
 					<table class="table">
 						<tr>
-							<td><a href="listaProdutosCarrinho">Carrinho</a></td>
+							<td ><a id="menuCarrinho" href="listaProdutosCarrinho">Carrinho</a></td>
 						</tr>
 						<tr>
 							<td><a href="index">Produtos</a></td>

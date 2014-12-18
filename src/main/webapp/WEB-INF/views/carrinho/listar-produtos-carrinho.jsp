@@ -33,7 +33,7 @@
 									</h5>
 								</div>
 								<div class="col-xs-3">
-									<input type="number" name="itens[${status.index}].quantidade" placeholder="Quantidade" class="form-control">
+									<input id="txt_quantidade" type="number" name="itens[${status.index}].quantidade" placeholder="Quantidade" class="form-control">
 								</div>
 								<br>
 							</div>
@@ -42,7 +42,7 @@
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<div class="pull-right">
-									<button type="submit" class="btn btn-primary">Finalizar Pedido</button>
+									<button id="btn_finalizar" type="submit" class="btn btn-primary">Finalizar Pedido</button>
 								</div>
 							</div>
 						</div>

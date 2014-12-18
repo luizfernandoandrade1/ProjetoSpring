@@ -1,6 +1,8 @@
 package br.com.granbery.tigershoes.teste;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,14 +28,17 @@ public class TestePedido {
 		cliente = ClienteDAO.getInstance().getById(1);
 		
 		Item item = new Item();
+		List<Item> itens = new ArrayList<>();
+		
 		item.setProduto(produto);
 		item.setQuantidade(5);
 		
+		itens.add(item);
+		itens.add(item);
 		
 		Pedido pedido = new Pedido();
 		pedido.setData(Calendar.getInstance());
-		pedido.setItens(item);
-		pedido.setItens(item);
+		pedido.setItens(itens);
 		pedido.setCliente(cliente);
 		
 		item.setPedido(pedido);

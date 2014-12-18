@@ -17,13 +17,13 @@
 							<form action="efetuarLogin"	role="form" method="post">
 								<div class="form-group">
 									<label for="exampleInputEmail1">E-mail</label> 
-									<input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Entre com e-mail">
+									<input id="txt_email" name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Entre com e-mail">
 								</div>
 								<div class="form-group">
 									<label for="exampleInputPassword1">Senha</label> 
-									<input name="senha" type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+									<input id="txt_senha" name="senha" type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
 								</div>
-								<button type="submit" class="btn btn-primary">Entrar</button>
+								<button id="btn_entrar" type="submit" class="btn btn-primary">Entrar</button>
 							</form>
 						</div>
 					</div>
