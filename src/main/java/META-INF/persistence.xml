@@ -9,6 +9,7 @@
 		<class>br.com.granbery.tigershoes.model.Cliente</class>
 		<class>br.com.granbery.tigershoes.model.Endereco</class>
 		<class>br.com.granbery.tigershoes.model.Item</class>
+		<class>br.com.granbery.tigershoes.model.Renda</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

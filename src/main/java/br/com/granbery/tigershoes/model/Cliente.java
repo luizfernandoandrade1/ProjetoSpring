@@ -11,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import br.com.granbery.tigershoes.enums.TipoCliente;
@@ -30,11 +31,14 @@ public class Cliente {
 	@Column(nullable = false)
 	private TipoCliente tipoCliente;
 	
-	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
 	
 	@OneToMany(mappedBy="cliente",fetch = FetchType.LAZY)
 	private Set<Pedido> pedidos;
+	
+	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	private Renda renda;
 	
 	public int getId() {
 		return id;
@@ -87,5 +91,10 @@ public class Cliente {
 	public String getTipoClienteString() {
 		return tipoCliente.name();
 	}
-	
+	public Renda getRenda() {
+		return renda;
+	}
+	public void setRenda(Renda renda) {
+		this.renda = renda;
+	}
 }
