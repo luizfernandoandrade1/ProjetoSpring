@@ -4,16 +4,19 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.ParseConversionEvent;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.granbery.tigershoes.dao.ClienteDAO;
+import br.com.granbery.tigershoes.enums.FaixaSalarial;
 import br.com.granbery.tigershoes.enums.TipoCliente;
 import br.com.granbery.tigershoes.model.Cliente;
 import br.com.granbery.tigershoes.model.Endereco;
 import br.com.granbery.tigershoes.model.Item;
+import br.com.granbery.tigershoes.model.Renda;
 
 @Controller
 public class ClienteController {
@@ -94,22 +97,89 @@ public class ClienteController {
 	}
 	
 	@RequestMapping("/salvarCliente")
-	public ModelAndView salvarCliente(Cliente cliente, Endereco endereco, HttpSession session) {
+	public ModelAndView salvarCliente(Cliente cliente, Endereco endereco, Renda renda, HttpSession session) {
 		String message = "Cliente Cadastrado com Sucesso!";
 		ModelAndView mv = new ModelAndView("cliente/sucesso-cadastro-cliente");
-	
-		cliente.setTipoCliente(TipoCliente.INTERNO);
 		
-		cliente.setEndereco(endereco);
-		
-		ClienteDAO.getInstance().persistCliente(cliente);
-		
-		if(cliente!=null) {
+		if(cliente.getSenha() == null) {
+			message = "Preencha a Senha do Cliente";
+			mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+			return mv;
+		} else if (cliente.getCpf() == null) {
+			message = "Preencha o CPF do Cliente";
+			mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+			return mv;
+		} else if (cliente.getEmail() == null) {
+			message = "Preencha o E-mail do Cliente";
+			mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+			return mv;
+		} else if (cliente.getNome() == null) {
+			message = "Preencha o Nome do Cliente";
+			mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+			return mv;
+		} else {
+			
 			session.setAttribute("cliente", cliente);
-		}	
-		mv.addObject("message", message);
-		mv.addObject("nome", cliente.getNome());
-		mv.addObject("tipoCliente", cliente.getTipoClienteString());
-		return mv;
+			
+			cliente.setTipoCliente(TipoCliente.INTERNO);
+			
+			if(verificaEndereco(endereco) != null) {
+				message = verificaEndereco(endereco);
+				mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+				return mv;
+				
+			} else {
+				
+				cliente.setEndereco(endereco);
+				
+				if(renda == null) {
+					message = "Faixa Salarial não foi informada!";
+					mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+					return mv;
+					
+				} else {
+					
+					double valor = Double.parseDouble(renda.getRenda());
+					
+					if(valor == FaixaSalarial.Pobre.getValor()) {
+						renda.setFaixaSalarial(FaixaSalarial.Pobre);
+						
+					} else if (valor == FaixaSalarial.ClasseMediaBaixa.getValor()) {
+						renda.setFaixaSalarial(FaixaSalarial.ClasseMediaBaixa);
+						
+					} else if (valor == FaixaSalarial.ClasseMedia.getValor()) {
+						renda.setFaixaSalarial(FaixaSalarial.ClasseMedia);
+						
+					} else if (valor == FaixaSalarial.ClasseMediaAlta.getValor()) {
+						renda.setFaixaSalarial(FaixaSalarial.ClasseMediaAlta);
+						
+					} else if (valor == FaixaSalarial.ClasseAltaBaixa.getValor()) {
+						renda.setFaixaSalarial(FaixaSalarial.ClasseAltaBaixa);
+						
+					} else {
+						renda.setFaixaSalarial(FaixaSalarial.ClasseAlta);
+						
+					}				
+					
+					cliente.setRenda(renda);
+					ClienteDAO.getInstance().persistCliente(cliente);
+					
+					mv.addObject("message", message);
+					mv.addObject("nome", cliente.getNome());
+					mv.addObject("tipoCliente", cliente.getTipoClienteString());
+					return mv;
+				}
+			}
+		}
+		
+	}
+	
+	private String verificaEndereco(Endereco endereco) {
+	
+	if(endereco == null) 
+			return "Favor preencha o Endereço corretamente!";
+	
+	return null;
+	
 	}
 }

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -28,7 +29,6 @@ public class Endereco {
 	
 	@Column(nullable = false)
 	private String pais;
-	
 	
 	@OneToOne(mappedBy="endereco", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private Fornecedor fornecedor;
