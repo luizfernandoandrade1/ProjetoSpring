@@ -100,85 +100,86 @@ public class ClienteController {
 	public ModelAndView salvarCliente(Cliente cliente, Endereco endereco, Renda renda, HttpSession session) {
 		String message = "Cliente Cadastrado com Sucesso!";
 		ModelAndView mv = new ModelAndView("cliente/sucesso-cadastro-cliente");
-	
-		cliente.setTipoCliente(TipoCliente.INTERNO);
 		
-		if(verificaEndereco(endereco).contains("Favor Preencha")) {
-			message = verificaEndereco(endereco);
+		if(cliente.getSenha() == null) {
+			message = "Preencha a Senha do Cliente";
 			mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
 			return mv;
-			
+		} else if (cliente.getCpf() == null) {
+			message = "Preencha o CPF do Cliente";
+			mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+			return mv;
+		} else if (cliente.getEmail() == null) {
+			message = "Preencha o E-mail do Cliente";
+			mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+			return mv;
+		} else if (cliente.getNome() == null) {
+			message = "Preencha o Nome do Cliente";
+			mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+			return mv;
 		} else {
 			
-			cliente.setEndereco(endereco);
+			session.setAttribute("cliente", cliente);
 			
-			if(renda == null) {
-				message = "Faixa Salarial não foi informada!";
+			cliente.setTipoCliente(TipoCliente.INTERNO);
+			
+			if(verificaEndereco(endereco) != null) {
+				message = verificaEndereco(endereco);
 				mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
 				return mv;
 				
 			} else {
 				
-				verificaFaixaSalarial(renda);
+				cliente.setEndereco(endereco);
 				
-				cliente.setRenda(renda);
-				
-				
-				if(cliente!=null) {
-					session.setAttribute("cliente", cliente);
+				if(renda == null) {
+					message = "Faixa Salarial não foi informada!";
+					mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+					return mv;
+					
+				} else {
+					
+					double valor = Double.parseDouble(renda.getRenda());
+					
+					if(valor == FaixaSalarial.Pobre.getValor()) {
+						renda.setFaixaSalarial(FaixaSalarial.Pobre);
+						
+					} else if (valor == FaixaSalarial.ClasseMediaBaixa.getValor()) {
+						renda.setFaixaSalarial(FaixaSalarial.ClasseMediaBaixa);
+						
+					} else if (valor == FaixaSalarial.ClasseMedia.getValor()) {
+						renda.setFaixaSalarial(FaixaSalarial.ClasseMedia);
+						
+					} else if (valor == FaixaSalarial.ClasseMediaAlta.getValor()) {
+						renda.setFaixaSalarial(FaixaSalarial.ClasseMediaAlta);
+						
+					} else if (valor == FaixaSalarial.ClasseAltaBaixa.getValor()) {
+						renda.setFaixaSalarial(FaixaSalarial.ClasseAltaBaixa);
+						
+					} else {
+						renda.setFaixaSalarial(FaixaSalarial.ClasseAlta);
+						
+					}				
+					
+					cliente.setRenda(renda);
 					ClienteDAO.getInstance().persistCliente(cliente);
+					
+					mv.addObject("message", message);
+					mv.addObject("nome", cliente.getNome());
+					mv.addObject("tipoCliente", cliente.getTipoClienteString());
+					return mv;
 				}
-				
-				mv.addObject("message", message);
-				mv.addObject("nome", cliente.getNome());
-				mv.addObject("tipoCliente", cliente.getTipoClienteString());
-				return mv;
 			}
 		}
 		
 	}
 	
-	private Renda verificaFaixaSalarial(Renda renda) {
-		double valor = Double.parseDouble(renda.getRenda());
-		
-		if(valor == FaixaSalarial.Pobre.getValor()) {
-			renda.setFaixaSalarial(FaixaSalarial.Pobre);
-			return renda;
-			
-		} else if (valor == FaixaSalarial.ClasseMediaBaixa.getValor()) {
-			renda.setFaixaSalarial(FaixaSalarial.ClasseMediaBaixa);
-			return renda;
-		} else if (valor == FaixaSalarial.ClasseMedia.getValor()) {
-			renda.setFaixaSalarial(FaixaSalarial.ClasseMedia);
-			return renda;
-		} else if (valor == FaixaSalarial.ClasseMediaAlta.getValor()) {
-			renda.setFaixaSalarial(FaixaSalarial.ClasseMediaAlta);
-			return renda;
-		} else if (valor == FaixaSalarial.ClasseAltaBaixa.getValor()) {
-			renda.setFaixaSalarial(FaixaSalarial.ClasseAltaBaixa);
-			return renda;
-		} else {
-			renda.setFaixaSalarial(FaixaSalarial.ClasseAlta);
-			return renda;
-		}
-	}
-	
 	private String verificaEndereco(Endereco endereco) {
-		
-		if(endereco == null) {
-			return "Favor preencha os campos do endereço";
-		} else if(endereco.getCep() == null) {
-			return "Favor preencha o CEP";
-		} else if(endereco.getCidade() == null) {
-			return "Favor preencha a Cidade";
-		} else if(endereco.getEstado() == null) {
-			return "Favor preencha a Cidade";
-		} else if(endereco.getPais() == null) {
-			return "Favor preencha o País";
-		} else if(endereco.getRua() == null) {
-			return "Favor preencha a Rua";
-		} else {
-			return "";
-		}
+	
+	if(endereco == null) 
+			return "Favor preencha o Endereço corretamente!";
+	
+	return null;
+	
 	}
 }
