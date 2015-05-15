@@ -22,7 +22,7 @@ public class Renda {
 	@Column(nullable = false)
 	private FaixaSalarial faixaSalarial;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Cliente cliente;
 	
 	public int getId() {
