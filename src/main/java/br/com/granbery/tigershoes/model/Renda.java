@@ -1,16 +1,12 @@
 package br.com.granbery.tigershoes.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import javax.persistence.ManyToOne;
 
 import br.com.granbery.tigershoes.enums.FaixaSalarial;
 
@@ -26,9 +22,9 @@ public class Renda {
 	@Column(nullable = false)
 	private FaixaSalarial faixaSalarial;
 	
-	@OneToMany(mappedBy="renda", fetch = FetchType.LAZY)
-	private List<Cliente> clientes = new ArrayList<Cliente>();
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Cliente cliente;
+	
 	public int getId() {
 		return id;
 	}
@@ -36,15 +32,7 @@ public class Renda {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public List<Cliente> getClientes() {
-		return clientes;
-	}
-
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
-	}
-
+	
 	public String getRenda() {
 		return renda;
 	}
@@ -60,4 +48,13 @@ public class Renda {
 	public void setFaixaSalarial(FaixaSalarial faixaSalarial) {
 		this.faixaSalarial = faixaSalarial;
 	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 }

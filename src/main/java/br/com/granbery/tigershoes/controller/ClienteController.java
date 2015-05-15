@@ -161,7 +161,7 @@ public class ClienteController {
 						
 					}				
 					
-					cliente.setRenda(renda);
+//					cliente.setRenda(renda);
 					ClienteDAO.getInstance().persistCliente(cliente);
 					
 					mv.addObject("message", message);

@@ -18,83 +18,91 @@ import br.com.granbery.tigershoes.enums.TipoCliente;
 
 @Entity
 public class Cliente {
-	
-	@Id @GeneratedValue
+
+	@Id
+	@GeneratedValue
 	private int id;
-	
+
 	private String nome;
 	private String cpf;
 	private String email;
 	private String senha;
-	
+
 	@Enumerated
 	@Column(nullable = false)
 	private TipoCliente tipoCliente;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
-	
-	@OneToMany(mappedBy="cliente",fetch = FetchType.LAZY)
+
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
 	private Set<Pedido> pedidos;
-	
-	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-	private Renda renda;
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getCpf() {
 		return cpf;
 	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getSenha() {
 		return senha;
 	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
 	public List<Endereco> getEndereco() {
 		return enderecos;
 	}
+
 	public void setEndereco(Endereco endereco) {
 		this.enderecos.add(endereco);
 	}
+
 	public TipoCliente getTipoCliente() {
 		return tipoCliente;
 	}
+
 	public void setTipoCliente(TipoCliente tipoCliente) {
 		this.tipoCliente = tipoCliente;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public Set<Pedido> getPedidos() {
 		return pedidos;
 	}
+
 	public void setPedidos(Pedido pedido) {
 		this.pedidos.add(pedido);
 	}
+
 	public String getTipoClienteString() {
 		return tipoCliente.name();
-	}
-	public Renda getRenda() {
-		return renda;
-	}
-	public void setRenda(Renda renda) {
-		this.renda = renda;
 	}
 }
