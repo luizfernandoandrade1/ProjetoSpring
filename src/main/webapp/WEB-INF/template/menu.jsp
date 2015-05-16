@@ -63,7 +63,7 @@
 								<td><a href="listarProdutos">Listar Produtos</a></td>
 							</tr>
 							<tr>
-								<td><a href="cadastrarProduto">Cadastrar Fornecedor</a></td>
+								<td><a href="cadastrarFornecedor">Cadastrar Fornecedor</a></td>
 							</tr>
 						</table>
 					</div>
