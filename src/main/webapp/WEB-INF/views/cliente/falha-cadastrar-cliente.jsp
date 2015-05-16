@@ -6,6 +6,7 @@
 	<div class="row">
 		<div class="col-md-5 col-md-offset-5" style="margin-left: 40px;">
 			<h2>${message}</h2>
+			<a href="cadastrarCliente">Voltar</a>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>

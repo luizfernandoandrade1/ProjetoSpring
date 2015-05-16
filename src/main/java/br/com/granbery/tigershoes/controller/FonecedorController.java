@@ -39,6 +39,20 @@ public class FonecedorController {
 		ModelAndView mv; 
 		cliente = (Cliente) request.getSession().getAttribute("cliente");
 		
+		if (verificaEnderecoFornecedor(endereco).isEmpty()) {
+			message = verificaEnderecoFornecedor(endereco);
+			mv = new ModelAndView("fornecedor/falha-cadastrar-fornecedor.jsp");
+			mv.addObject("message", message);
+			return mv;
+		}
+		
+		if (fornecedor.getNome().isEmpty()) {
+			message = "Preencha o nome do Fornecedor";
+			mv = new ModelAndView("fornecedor/falha-cadastrar-fornecedor.jsp");
+			mv.addObject("message", message);
+			return mv;
+		}
+		
 		if(cliente==null) {
 			mv = new ModelAndView("cliente/login-cliente");
 			return mv;
@@ -56,5 +70,26 @@ public class FonecedorController {
 			return mv;
 		}
 		
+	}
+	
+	private String verificaEnderecoFornecedor(Endereco endereco) {
+	
+		if (endereco.getCep().isEmpty()) {
+			return "Preencha o campo CEP";
+		}
+		else if (endereco.getCidade().isEmpty()) {
+			return "Preencha o campo Cidade";
+		}
+		else if (endereco.getEstado().isEmpty()) {
+			return "Preencha o campo Estado";
+		}
+		else if (endereco.getPais().isEmpty()) {
+			return "Preencha o campo País";
+		}
+		else if (endereco.getRua().isEmpty()) {
+			return "Preencha o campo Rua";
+		}
+		
+		return "";
 	}
 }
