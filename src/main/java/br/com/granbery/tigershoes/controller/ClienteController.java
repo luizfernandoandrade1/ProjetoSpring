@@ -102,21 +102,25 @@ public class ClienteController {
 		String message = "Cliente Cadastrado com Sucesso!";
 		ModelAndView mv = new ModelAndView("cliente/sucesso-cadastro-cliente");
 		
-		if(cliente.getSenha() == null) {
+		if(cliente.getSenha().isEmpty()) {
 			message = "Preencha a Senha do Cliente";
-			mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+			mv = new ModelAndView("cliente/falha-cadastrar-cliente");
+			mv.addObject("message", message);
 			return mv;
-		} else if (cliente.getCpf() == null) {
+		} else if (cliente.getCpf().isEmpty()) {
 			message = "Preencha o CPF do Cliente";
-			mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+			mv = new ModelAndView("cliente/falha-cadastrar-cliente");
+			mv.addObject("message", message);
 			return mv;
-		} else if (cliente.getEmail() == null) {
+		} else if (cliente.getEmail().isEmpty()) {
 			message = "Preencha o E-mail do Cliente";
-			mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+			mv = new ModelAndView("cliente/falha-cadastrar-cliente");
+			mv.addObject("message", message);
 			return mv;
-		} else if (cliente.getNome() == null) {
+		} else if (cliente.getNome().isEmpty()) {
 			message = "Preencha o Nome do Cliente";
-			mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+			mv = new ModelAndView("cliente/falha-cadastrar-cliente");
+			mv.addObject("message", message);
 			return mv;
 		} else {
 			
@@ -126,7 +130,7 @@ public class ClienteController {
 			
 			if(verificaEndereco(endereco) != null) {
 				message = verificaEndereco(endereco);
-				mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+				mv = new ModelAndView("cliente/falha-cadastrar-cliente");
 				return mv;
 				
 			} else {
@@ -135,7 +139,7 @@ public class ClienteController {
 				
 				if(renda == null) {
 					message = "Faixa Salarial não foi informada!";
-					mv = new ModelAndView("cliente/falha-cadastrar-cliente.jsp");
+					mv = new ModelAndView("cliente/falha-cadastrar-cliente");
 					return mv;
 					
 				} else {
