@@ -3,11 +3,11 @@ package br.com.granbery.tigershoes.enums;
 public enum FaixaSalarial {
 	
 	Pobre("Pobre", 700),
-	ClasseMediaBaixa("Classe Media Baixa", 1.540),
-	ClasseMedia("Classe Media", 1.925),
-	ClasseMediaAlta("Classe Media Alta", 2.813),
-	ClasseAltaBaixa("Classe Alta Baixa", 4.845),
-	ClasseAlta("Classe Alta", 12.988);
+	ClasseMediaBaixa("Classe Media Baixa", 1540),
+	ClasseMedia("Classe Media", 1925),
+	ClasseMediaAlta("Classe Media Alta", 2813),
+	ClasseAltaBaixa("Classe Alta Baixa", 4845),
+	ClasseAlta("Classe Alta", 12988);
 	
 	private double valor;
 	private String faixa;

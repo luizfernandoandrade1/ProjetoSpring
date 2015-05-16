@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.granbery.tigershoes.dao.ClienteDAO;
+import br.com.granbery.tigershoes.dao.RendaDAO;
 import br.com.granbery.tigershoes.enums.FaixaSalarial;
 import br.com.granbery.tigershoes.enums.TipoCliente;
 import br.com.granbery.tigershoes.model.Cliente;
@@ -139,7 +140,7 @@ public class ClienteController {
 					
 				} else {
 					
-					double valor = Double.parseDouble(renda.getRenda());
+					int valor = Integer.parseInt(renda.getRenda());
 					
 					if(valor == FaixaSalarial.Pobre.getValor()) {
 						renda.setFaixaSalarial(FaixaSalarial.Pobre);
@@ -161,8 +162,9 @@ public class ClienteController {
 						
 					}				
 					
-//					cliente.setRenda(renda);
+					renda.setCliente(cliente);
 					ClienteDAO.getInstance().persistCliente(cliente);
+					RendaDAO.getInstance().persistRenda(renda);
 					
 					mv.addObject("message", message);
 					mv.addObject("nome", cliente.getNome());
@@ -176,9 +178,9 @@ public class ClienteController {
 	
 	private String verificaEndereco(Endereco endereco) {
 	
-	if(endereco == null) 
+	if(endereco == null) {
 			return "Favor preencha o Endereço corretamente!";
-	
+	}
 	return null;
 	
 	}
