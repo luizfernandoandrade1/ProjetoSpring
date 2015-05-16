@@ -16,7 +16,7 @@ import br.com.granbery.tigershoes.model.Endereco;
 import br.com.granbery.tigershoes.model.Renda;
 
 
-public class TesteCliente {
+public class TesteClienteCadastro {
 	
 	private Cliente cliente;
 		

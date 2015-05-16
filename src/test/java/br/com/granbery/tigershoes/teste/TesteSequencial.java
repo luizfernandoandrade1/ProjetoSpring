@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses(value = {
-		TesteCliente.class,
+		TesteClienteCadastro.class,
 		TesteFornecedor.class,
 		TesteProduto.class,
 		TestePedido.class
