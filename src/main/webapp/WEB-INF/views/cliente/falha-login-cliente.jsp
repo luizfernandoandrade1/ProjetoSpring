@@ -4,7 +4,7 @@
 <div class="container">
 	<jsp:include page="/WEB-INF/template/menu.jsp" />
 	<div class="row">
-		<div class="col-md-5 col-md-offset-5" style="margin-left: 40px;">
+		<div id="err_login" class="col-md-5 col-md-offset-5" style="margin-left: 40px;">
 			<h2>${message}</h2>
 		</div>
 		<!-- /.col-lg-12 -->

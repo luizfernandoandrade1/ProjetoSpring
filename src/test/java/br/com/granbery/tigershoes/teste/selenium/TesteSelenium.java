@@ -30,6 +30,15 @@ public abstract class TesteSelenium {
 		driver.findElement(By.id(id)).sendKeys(texto);
 	}
 	
+	public String capturarTexto(String id){
+		return driver.findElement(By.id(id)).getText();
+	}
+	public String capturarTextoPelaClasse(String classe){
+		return driver.findElement(By.className(classe)).getText();
+	}
+	public void finalizarFirefox(){
+		driver.quit();
+	}
 	
 	
 }

@@ -17,7 +17,7 @@ public class TesteProduto {
 	@Test
 	public void persistirProduto(){
 		Fornecedor fornecedor = new Fornecedor();
-		fornecedor = FornecedorDAO.getInstance().getById(2);
+		fornecedor = FornecedorDAO.getInstance().getById(1);
 		Produto produto = new Produto();
 		produto.setMarca("Nike Mercurial");
 		produto.setModelo("Chuteira");
@@ -32,7 +32,7 @@ public class TesteProduto {
 	@Test
 	public void findProdutoByMarca(){
 		List<Produto> produtos = new ArrayList<Produto>(); 
-		produtos = ProdutoDAO.getInstance().getByMarca("Nike");
+		produtos = ProdutoDAO.getInstance().getByMarca("Nike Mercurial");
 		
 		Assert.assertTrue(produtos.size()>0);
 	}
