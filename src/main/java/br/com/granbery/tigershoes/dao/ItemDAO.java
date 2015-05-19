@@ -8,7 +8,7 @@ import br.com.granbery.tigershoes.model.Cliente;
 import br.com.granbery.tigershoes.model.Item;
 import br.com.granbery.tigershoes.util.JPAUtil;
 
-public class ItemDAO {
+public class ItemDAO implements AbstractDAO {
 	
 	private static ItemDAO instance = new ItemDAO();
 	
@@ -25,7 +25,8 @@ public class ItemDAO {
 	
 	private EntityManager em = JPAUtil.getEntityManager();
 	
-	public boolean persistProduto(Item item) {
+	@Override
+	public boolean persist(Object item) {
 
 		try{
 			em.getTransaction().begin();
@@ -88,4 +89,10 @@ public class ItemDAO {
             em.getTransaction().rollback();
         }
     }
+
+	@Override
+	public Object recuperarObjeto(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

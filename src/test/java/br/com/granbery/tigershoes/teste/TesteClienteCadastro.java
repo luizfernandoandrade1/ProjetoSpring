@@ -10,6 +10,9 @@ import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.granbery.tigershoes.controller.ClienteController;
+import br.com.granbery.tigershoes.dao.AbstractDAO;
+import br.com.granbery.tigershoes.dao.ClienteDAO;
+import br.com.granbery.tigershoes.dao.RendaDAO;
 import br.com.granbery.tigershoes.enums.FaixaSalarial;
 import br.com.granbery.tigershoes.model.Cliente;
 import br.com.granbery.tigershoes.model.Endereco;
@@ -27,15 +30,18 @@ public class TesteClienteCadastro {
 	
 	@Test
 	public void testClienteSemSenha() throws Exception {
-		cliente.setSenha(null);
+		cliente.setSenha("");
 		
 		HttpSession requestMock = createMock(HttpSession.class);
 		Endereco enderecoMock = createMock(Endereco.class);
 		Renda rendaMock = createMock(Renda.class);
+		AbstractDAO clienteDAO = createMock(ClienteDAO.class);
+		AbstractDAO RendaDAO = createMock(RendaDAO.class);
 		
-		ClienteController clienteController = new ClienteController();
+		ClienteController clienteController = new ClienteController(clienteDAO, RendaDAO);
+		
 		ModelAndView mv = clienteController.salvarCliente(cliente, enderecoMock, rendaMock, requestMock);
-		Assert.assertEquals("cliente/falha-cadastrar-cliente.jsp", mv.getViewName()); 
+		Assert.assertEquals("cliente/falha-cadastrar-cliente", mv.getViewName()); 
 				
 	}
 	

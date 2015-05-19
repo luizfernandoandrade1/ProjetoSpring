@@ -84,7 +84,7 @@ public class CarrinhoController {
 				pedidoItem.setPedido(pedidoForm);
 			}
 			
-			PedidoDAO.getInstace().persistPedido(pedidoForm);
+			PedidoDAO.getInstace().persist(pedidoForm);
 			
 			return mv;
 			

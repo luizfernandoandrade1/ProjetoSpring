@@ -64,7 +64,7 @@ public class FonecedorController {
 			fornecedor.setEndereco(endereco);
 			endereco.setFornecedor(fornecedor);
 			
-			FornecedorDAO.getInstance().persistFornecedor(fornecedor);
+			FornecedorDAO.getInstance().persist(fornecedor);
 			
 			mv.addObject("message", message);
 			mv.addObject("cliente", cliente);

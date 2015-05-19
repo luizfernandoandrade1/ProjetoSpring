@@ -36,7 +36,7 @@ public class TesteClienteLogin {
 		ArrayList<Item> listaItens = null;
 		
 		AbstractDAO clienteDAO = createMock(ClienteDAO.class);
-		expect(clienteDAO.recuperarCliente(cliente)).andReturn(cliente);
+		expect(clienteDAO.recuperarObjeto(cliente)).andReturn(cliente);
 		replay(clienteDAO);
 		
 		HttpSession sessiontMock = createMock(HttpSession.class);

@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import br.com.granbery.tigershoes.model.Pedido;
 import br.com.granbery.tigershoes.util.JPAUtil;
 
-public class PedidoDAO {
+public class PedidoDAO implements AbstractDAO {
 
 	private static PedidoDAO instance = new PedidoDAO();
 	
@@ -24,7 +24,8 @@ public class PedidoDAO {
 	
 	private EntityManager em = JPAUtil.getEntityManager();
 	
-	public boolean persistPedido(Pedido pedido) {
+	@Override
+	public boolean persist(Object pedido) {
 
 		try{
 			em.getTransaction().begin();
@@ -86,5 +87,11 @@ public class PedidoDAO {
             ex.printStackTrace();
         }
     }
+
+	@Override
+	public Object recuperarObjeto(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

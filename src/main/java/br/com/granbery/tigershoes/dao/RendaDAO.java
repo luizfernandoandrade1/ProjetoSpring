@@ -2,10 +2,9 @@ package br.com.granbery.tigershoes.dao;
 
 import javax.persistence.EntityManager;
 
-import br.com.granbery.tigershoes.model.Renda;
 import br.com.granbery.tigershoes.util.JPAUtil;
 
-public class RendaDAO {
+public class RendaDAO implements AbstractDAO{
 	
 	private static RendaDAO instance = new RendaDAO();
 	
@@ -18,7 +17,8 @@ public class RendaDAO {
 	
 	private EntityManager em = JPAUtil.getEntityManager();
 	
-	public boolean persistRenda(Renda renda) {
+	@Override
+	public boolean persist(Object renda) {
 		try{
 			em.getTransaction().begin();
 			em.persist(renda);
@@ -31,5 +31,11 @@ public class RendaDAO {
 			return false;	
 		}
 			
+	}
+
+	@Override
+	public Object recuperarObjeto(Object object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

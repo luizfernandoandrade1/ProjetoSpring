@@ -23,6 +23,6 @@ public class TesteFornecedor {
 		
 		fornecedor.setEndereco(endereco);
 		
-		Assert.assertTrue(FornecedorDAO.getInstance().persistFornecedor(fornecedor));
+		Assert.assertTrue(FornecedorDAO.getInstance().persist(fornecedor));
 	}
 }

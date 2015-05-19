@@ -44,7 +44,7 @@ public class TestePedido {
 		item.setPedido(pedido);
 		
 		
-		Assert.assertTrue(PedidoDAO.getInstace().persistPedido(pedido));
+		Assert.assertTrue(PedidoDAO.getInstace().persist(pedido));
 		
 	}
 }

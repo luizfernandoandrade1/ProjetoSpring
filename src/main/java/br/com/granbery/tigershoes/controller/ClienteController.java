@@ -24,13 +24,20 @@ import br.com.granbery.tigershoes.model.Renda;
 public class ClienteController {
 	
 	ClienteDAO clienteDAO;
+	RendaDAO rendaDAO;
 	
 	public ClienteController() {
 		clienteDAO = ClienteDAO.getInstance();
+		rendaDAO = RendaDAO.getInstance();
 	}
 	
 	public ClienteController(AbstractDAO dao){
 		this.clienteDAO = (ClienteDAO) dao;
+	}
+	
+	public ClienteController(AbstractDAO clienteDAO, AbstractDAO rendaDAO){
+		this.clienteDAO = (ClienteDAO) clienteDAO;
+		this.rendaDAO = (RendaDAO) rendaDAO;
 	}
 	
 	@RequestMapping("/cadastrarCliente")
@@ -74,7 +81,7 @@ public class ClienteController {
 	public ModelAndView efetuaLogin(Cliente cliente, HttpSession session, HttpServletRequest request) {
 		ModelAndView mv;
 		ArrayList<Item> listaItens = (ArrayList<Item>) request.getSession().getAttribute("carrinho");
-		cliente = clienteDAO.recuperarCliente(cliente);
+		cliente = (Cliente) clienteDAO.recuperarObjeto(cliente);
 		
 		if((cliente!=null && listaItens!=null)) {
 			session.setAttribute("cliente", cliente);
@@ -176,8 +183,8 @@ public class ClienteController {
 					}				
 					
 					renda.setCliente(cliente);
-					ClienteDAO.getInstance().persistCliente(cliente);
-					RendaDAO.getInstance().persistRenda(renda);
+					clienteDAO.persist(cliente);
+					rendaDAO.persist(renda);
 					
 					mv.addObject("message", message);
 					mv.addObject("nome", cliente.getNome());

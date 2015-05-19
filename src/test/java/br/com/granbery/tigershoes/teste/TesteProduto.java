@@ -26,7 +26,7 @@ public class TesteProduto {
 		produto.setNumero("43");
 		produto.setPreco(250.00);
 		produto.setFornecedor(fornecedor);
-		Assert.assertTrue(ProdutoDAO.getInstance().persistProduto(produto));
+		Assert.assertTrue(ProdutoDAO.getInstance().persist(produto));
 	}
 	
 	@Test

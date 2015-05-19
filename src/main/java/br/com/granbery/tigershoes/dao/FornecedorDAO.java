@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import br.com.granbery.tigershoes.model.Fornecedor;
 import br.com.granbery.tigershoes.util.JPAUtil;
 
-public class FornecedorDAO {
+public class FornecedorDAO implements AbstractDAO {
 	private static FornecedorDAO instance = new FornecedorDAO();
 	
 	public static FornecedorDAO getInstance() {
@@ -23,7 +23,8 @@ public class FornecedorDAO {
 	
 	private EntityManager em = JPAUtil.getEntityManager();
 	
-	public boolean persistFornecedor(Fornecedor fornecedor) {
+	@Override
+	public boolean persist(Object fornecedor) {
 
 		try{
 			em.getTransaction().begin();
@@ -87,5 +88,11 @@ public class FornecedorDAO {
             em.getTransaction().rollback();
         }
     }
+
+	@Override
+	public Object recuperarObjeto(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

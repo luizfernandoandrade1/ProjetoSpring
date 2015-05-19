@@ -70,7 +70,7 @@ public class ProdutoController {
 			return mv;
 			
 		} else {
-			ProdutoDAO.getInstance().persistProduto(produto);
+			ProdutoDAO.getInstance().persist(produto);
 			mv.addObject("message", "Produto Cadastrado com Sucesso!");					
 			mv.addObject("cliente", cliente);
 			mv.addObject("tipoCliente", cliente.getTipoClienteString());
@@ -93,7 +93,7 @@ public class ProdutoController {
 			return mv;
 			
 		} else {
-			ProdutoDAO.getInstance().persistProduto(produto);
+			ProdutoDAO.getInstance().persist(produto);
 			mv.addObject("message", "Produto Cadastrado com Sucesso!");					
 			mv.addObject("cliente", cliente);
 			mv.addObject("tipoCliente", cliente.getTipoClienteString());
@@ -115,7 +115,7 @@ public class ProdutoController {
 			return mv;
 			
 		} else {
-			ProdutoDAO.getInstance().persistProduto(produto);					
+			ProdutoDAO.getInstance().persist(produto);					
 			produto.setFornecedor(fornecedor);
 			ProdutoDAO.getInstance().merge(produto);
 			mv.addObject("cliente", cliente);

@@ -27,8 +27,8 @@ public class ClienteDAO implements AbstractDAO {
 
 	private EntityManager em = JPAUtil.getEntityManager();
 	
-	
-	public boolean persistCliente(Cliente cliente) {
+	@Override
+	public boolean persist(Object cliente) {
 
 		try{
 			em.getTransaction().begin();
@@ -93,10 +93,11 @@ public class ClienteDAO implements AbstractDAO {
         }
     }
 	
-	public Cliente recuperarCliente(Cliente cliente) {
+	@Override
+	public Object recuperarObjeto(Object cliente) {
 		Query hql = em.createQuery("from Cliente c where c.email = :email and c.senha = :senha");
-		hql.setParameter("email", cliente.getEmail());
-		hql.setParameter("senha", cliente.getSenha());
+		hql.setParameter("email", ((Cliente) cliente).getEmail());
+		hql.setParameter("senha", ((Cliente) cliente).getSenha());
 		
 		try {
 			return (Cliente) hql.getSingleResult();			

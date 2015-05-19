@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import br.com.granbery.tigershoes.model.Produto;
 import br.com.granbery.tigershoes.util.JPAUtil;
 
-public class ProdutoDAO {
+public class ProdutoDAO implements AbstractDAO {
 	
 	private static ProdutoDAO instance = new ProdutoDAO();
 		
@@ -25,7 +25,7 @@ public class ProdutoDAO {
 	
 	private EntityManager em = JPAUtil.getEntityManager();
 	
-	public boolean persistProduto(Produto produto) {
+	public boolean persist(Object produto) {
 		try{
 			em.getTransaction().begin();
 			em.persist(produto);
@@ -101,6 +101,12 @@ public class ProdutoDAO {
             em.getTransaction().rollback();
         }
     }
+
+	@Override
+	public Object recuperarObjeto(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }
