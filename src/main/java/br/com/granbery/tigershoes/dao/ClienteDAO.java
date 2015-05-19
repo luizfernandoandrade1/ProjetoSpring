@@ -9,7 +9,7 @@ import br.com.granbery.tigershoes.model.Cliente;
 import br.com.granbery.tigershoes.util.JPAUtil;
 
 
-public class ClienteDAO {
+public class ClienteDAO implements AbstractDAO {
 	
 	private static ClienteDAO instance = new ClienteDAO();
 	
@@ -93,7 +93,7 @@ public class ClienteDAO {
         }
     }
 	
-	public Cliente logarCliente(Cliente cliente) {
+	public Cliente recuperarCliente(Cliente cliente) {
 		Query hql = em.createQuery("from Cliente c where c.email = :email and c.senha = :senha");
 		hql.setParameter("email", cliente.getEmail());
 		hql.setParameter("senha", cliente.getSenha());

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.granbery.tigershoes.dao.AbstractDAO;
 import br.com.granbery.tigershoes.dao.ClienteDAO;
 import br.com.granbery.tigershoes.dao.RendaDAO;
 import br.com.granbery.tigershoes.enums.FaixaSalarial;
@@ -21,6 +22,16 @@ import br.com.granbery.tigershoes.model.Renda;
 
 @Controller
 public class ClienteController {
+	
+	ClienteDAO clienteDAO;
+	
+	public ClienteController() {
+		clienteDAO = ClienteDAO.getInstance();
+	}
+	
+	public ClienteController(AbstractDAO dao){
+		this.clienteDAO = (ClienteDAO) dao;
+	}
 	
 	@RequestMapping("/cadastrarCliente")
 	public ModelAndView cadastrarCliente(Cliente cliente, HttpServletRequest request) {
@@ -63,7 +74,7 @@ public class ClienteController {
 	public ModelAndView efetuaLogin(Cliente cliente, HttpSession session, HttpServletRequest request) {
 		ModelAndView mv;
 		ArrayList<Item> listaItens = (ArrayList<Item>) request.getSession().getAttribute("carrinho");
-		cliente = ClienteDAO.getInstance().logarCliente(cliente);
+		cliente = clienteDAO.recuperarCliente(cliente);
 		
 		if((cliente!=null && listaItens!=null)) {
 			session.setAttribute("cliente", cliente);
@@ -72,9 +83,7 @@ public class ClienteController {
 			mv.addObject("tipoCliente", cliente.getTipoClienteString());
 			
 			return mv;
-		}
-		
-		if(cliente!=null) {
+		} else if(cliente!=null) {
 			session.setAttribute("cliente", cliente);
 			mv = new ModelAndView("index");
 			mv.addObject("cliente", cliente);
@@ -82,7 +91,7 @@ public class ClienteController {
 			return mv;
 			
 		} else {
-			String message = "Usuário é Senha Invalidos!";
+			String message = "Usuário ou Senha Invalidos!";
 			mv = new ModelAndView("cliente/falha-login-cliente");
 			mv.addObject("message", message);
 			return mv;
