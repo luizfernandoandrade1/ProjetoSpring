@@ -62,7 +62,7 @@
 					</li>
 					
 					<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<a id="cmb_login" href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<span class="glyphicon glyphicon-user"></span>						
 						 <c:if test="${empty cliente.nome}">
 						 	Olá, Visitante <b class="caret"></b>		
@@ -71,9 +71,9 @@
 						 	Olá, ${cliente.nome} <b class="caret"></b>		
 						 </c:if>
 					</a>
-		            <ul class="dropdown-menu">
+		            <ul  class="dropdown-menu">
 		            	<c:if test="${empty cliente.nome}">
-		                	<li><a href="loginCliente"><span class="glyphicon glyphicon-user"></span> Entrar</a></li>
+		                	<li><a id="opt_entrar" href="loginCliente"><span class="glyphicon glyphicon-user"></span> Entrar</a></li>
 		                </c:if>
 		                <c:if test="${not empty cliente.nome}">
 		                	<li class="divider"></li>

@@ -13,8 +13,8 @@ public class TesteCompra extends TesteSelenium{
 		abrirLink("http://localhost:8080/TigerShoes/listaProdutosCarrinho");
 		digitar("5", "txt_quantidade");
 		clicar("btn_finalizar");
-		digitar("luizfernando@andrade.com", "txt_email");
-		digitar("12345", "txt_senha");
+		digitar("teste@teste.com", "txt_email");
+		digitar("123", "txt_senha");
 		clicar("btn_entrar");
 		digitar("5", "txt_quantidade");
 		clicar("btn_finalizar");
