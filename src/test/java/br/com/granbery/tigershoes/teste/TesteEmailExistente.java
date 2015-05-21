@@ -2,7 +2,7 @@ package br.com.granbery.tigershoes.teste;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
-
+import static org.easymock.EasyMock.replay;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,9 +26,9 @@ public class TesteEmailExistente {
 		
 		AbstractDAO clienteDAO = createMock(ClienteDAO.class);
 		expect(clienteDAO.recuperarPorEmail(email)).andReturn(true);
-		
-		Cliente cliente = new Cliente(clienteDAO);
-		Assert.assertEquals("Email já cadastrado!", cliente.verificarEmailExistente(email));
+		replay(clienteDAO);
+		Cliente cliente = new Cliente();
+		Assert.assertEquals("Email já cadastrado!", cliente.verificarEmailExistente(email, (ClienteDAO) clienteDAO));
 	}
 	
 	@Test
@@ -36,8 +36,8 @@ public class TesteEmailExistente {
 		
 		AbstractDAO clienteDAO = createMock(ClienteDAO.class);
 		expect(clienteDAO.recuperarPorEmail(email)).andReturn(false);
-		
-		Cliente cliente = new Cliente(clienteDAO);
-		Assert.assertEquals("Email não cadastrado", cliente.verificarEmailExistente(email));
+		replay(clienteDAO);
+		Cliente cliente = new Cliente();
+		Assert.assertEquals("Email não cadastrado", cliente.verificarEmailExistente(email, (ClienteDAO) clienteDAO));
 	}
 }

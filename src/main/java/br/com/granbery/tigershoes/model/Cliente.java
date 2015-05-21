@@ -20,14 +20,6 @@ import br.com.granbery.tigershoes.enums.TipoCliente;
 @Entity
 public class Cliente {
 
-	ClienteDAO clienteDAO;
-	
-	public Cliente() {
-		clienteDAO = ClienteDAO.getInstance();
-	}
-	public Cliente(AbstractDAO dao){
-		clienteDAO = (ClienteDAO) dao;
-	}
 	@Id
 	@GeneratedValue
 	private int id;
@@ -115,7 +107,7 @@ public class Cliente {
 		return tipoCliente.name();
 	}
 	
-	public String verificarEmailExistente(String email){
+	public String verificarEmailExistente(String email,ClienteDAO clienteDAO){
 		if (clienteDAO.recuperarPorEmail(email)){
 			return "Email já cadastrado!";
 		} else {
