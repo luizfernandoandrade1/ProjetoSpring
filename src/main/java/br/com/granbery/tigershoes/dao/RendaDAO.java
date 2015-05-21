@@ -38,4 +38,10 @@ public class RendaDAO implements AbstractDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean recuperarPorEmail(String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -107,4 +107,16 @@ public class ClienteDAO implements AbstractDAO {
 				
 	}
 	
+	@Override
+	public boolean recuperarPorEmail(String email) {
+		Query hql = em.createQuery("from Cliente c where c.email = :email");
+		hql.setParameter("email", email);
+		try {
+			return  hql.getSingleResult() != null;			
+		} catch (Exception e) {
+			return false;
+		}
+				
+	}
+	
 }
