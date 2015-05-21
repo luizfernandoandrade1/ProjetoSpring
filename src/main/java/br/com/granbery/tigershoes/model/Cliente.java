@@ -11,14 +11,23 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import br.com.granbery.tigershoes.dao.AbstractDAO;
+import br.com.granbery.tigershoes.dao.ClienteDAO;
 import br.com.granbery.tigershoes.enums.TipoCliente;
 
 @Entity
 public class Cliente {
 
+	ClienteDAO clienteDAO;
+	
+	public Cliente() {
+		clienteDAO = ClienteDAO.getInstance();
+	}
+	public Cliente(AbstractDAO dao){
+		clienteDAO = (ClienteDAO) dao;
+	}
 	@Id
 	@GeneratedValue
 	private int id;
@@ -104,5 +113,13 @@ public class Cliente {
 
 	public String getTipoClienteString() {
 		return tipoCliente.name();
+	}
+	
+	public String verificarEmailExistente(String email){
+		if (clienteDAO.recuperarPorEmail(email)){
+			return "Email já cadastrado!";
+		} else {
+			return "Email não cadastrado";
+		}
 	}
 }
